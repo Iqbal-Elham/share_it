@@ -5,8 +5,11 @@ import bgVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from 'jwt-decode';
+import { client } from '../client';
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const responseGoogle = (response) => {
         // console.log(jwt_decode(response.credential));
@@ -19,6 +22,11 @@ const Login = () => {
             userName: name,
             image: picture,
         }
+
+        client.createIfNotExists(doc)
+            .then(() => {
+                navigate('/', {replace: true});
+            })
     }
 
   return (
@@ -42,6 +50,7 @@ const Login = () => {
           <GoogleLogin
             onSuccess={responseGoogle}
             onError={responseGoogle}
+            cookiePolicy='single_host_origin'
           />
         </div>
       </div>
