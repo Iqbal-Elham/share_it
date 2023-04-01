@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const Home = () => {
     return (
         <div>
-            hello 
+            hello Home
         </div>
     );
 }
